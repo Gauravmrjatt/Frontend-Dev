@@ -142,6 +142,3 @@ This document covered:
 
 ---
 
-📄 **Author:** *Yash Khandelwal*  
-🕓 **Date:** *14 October 2025*  
-📚 **Subject:** *Web Development Basics*

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- q11_student_info.html
+     Student information form with a select dropdown for course selection.
+     Default option "Select Course" is disabled and selected.
+-->
+<head>
+  <meta charset="UTF-8">
+  <title>Student Information</title>
+</head>
+<body>
+  <h1>Student Information</h1>
+  <form method="post" action="#">
+    <label for="sname">Name:</label><br>
+    <input id="sname" name="sname" type="text" required><br><br>
+
+    <label for="roll">Roll Number:</label><br>
+    <input id="roll" name="roll" type="text" required><br><br>
+
+    <label for="course">Course:</label><br>
+    <select id="course" name="course" required>
+      <option value="" disabled selected>Select Course</option>
+      <option value="bsc">B.Sc</option>
+      <option value="bcom">B.Com</option>
+      <option value="ba">B.A</option>
+      <option value="btech">B.Tech</option>
+    </select><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- q3_two_iframes.html
+     Displays two iframes stacked vertically:
+     - Top: introduction page (local file or placeholder)
+     - Bottom: favorite hobby page (local file or placeholder)
+     Uses width and height attributes to balance them.
+-->
+<head>
+  <meta charset="UTF-8">
+  <title>Two Iframes Stack</title>
+</head>
+<body>
+  <h1>Introduction and Hobby (Iframes)</h1>
+
+  <!-- First iframe: introduction page -->
+  <iframe
+    title="Introduction Page"
+    srcdoc='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Intro</title></head><body><h2>Introduction</h2><p>Hello — this is my introduction page.</p></body></html>'
+    width="100%"
+    height="45%">
+  </iframe>
+
+  <!-- Second iframe: hobby page -->
+  <iframe
+    title="Hobby Page"
+    srcdoc='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Hobby</title></head><body><h2>My Hobby</h2><p>My favorite hobby is photography and travel.</p></body></html>'
+    width="100%"
+    height="45%">
+  </iframe>
+</body>
+</html>

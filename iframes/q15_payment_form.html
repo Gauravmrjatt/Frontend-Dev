@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- q15_payment_form.html
+     Payment form with cardholder name, card number, expiry date and CVV.
+     All fields use required attribute.
+-->
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Form</title>
+</head>
+<body>
+  <h1>Payment</h1>
+  <form method="post" action="#">
+    <label for="cardname">Cardholder Name:</label><br>
+    <input id="cardname" name="cardname" type="text" required><br><br>
+
+    <label for="cardnumber">Card Number:</label><br>
+    <input id="cardnumber" name="cardnumber" type="text" inputmode="numeric" required><br><br>
+
+    <label for="expiry">Expiry Date (MM/YY):</label><br>
+    <input id="expiry" name="expiry" type="text" placeholder="MM/YY" required><br><br>
+
+    <label for="cvv">CVV:</label><br>
+    <input id="cvv" name="cvv" type="password" inputmode="numeric" maxlength="4" required><br><br>
+
+    <button type="submit">Pay Now</button>
+  </form>
+</body>
+</html>

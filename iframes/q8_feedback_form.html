@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- q8_feedback_form.html
+     Feedback form with textarea and rating radio buttons.
+     Uses method="post" and action="#"
+-->
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback Form</title>
+</head>
+<body>
+  <h1>Feedback</h1>
+  <form method="post" action="#">
+    <label for="feedback">Your feedback:</label><br>
+    <textarea id="feedback" name="feedback" rows="6" cols="50" required></textarea><br><br>
+
+    <p>Rating:</p>
+    <input type="radio" id="good" name="rating" value="good" required>
+    <label for="good">Good</label><br>
+
+    <input type="radio" id="average" name="rating" value="average" required>
+    <label for="average">Average</label><br>
+
+    <input type="radio" id="poor" name="rating" value="poor" required>
+    <label for="poor">Poor</label><br><br>
+
+    <button type="submit">Submit Feedback</button>
+  </form>
+</body>
+</html>

@@ -3,17 +3,18 @@ name: Mirror Repo to Friend
 on:
   push:
     branches:
-      - '**'
+      - '**'   # Run for all branches
 
 jobs:
   sync:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source branch
+      - name: Checkout source branch (no credentials)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false  # 🔴 Prevents GitHub bot token override
 
       - name: Configure Git
         run: |
@@ -22,30 +23,23 @@ jobs:
           git config --system --unset credential.helper || true
           git config --global --unset credential.helper || true
 
-      - name: Add friend remote
+      - name: Push to Yash Repo (excluding workflows)
         env:
-          FRIEND_REPO_TOKEN1: ${{ secrets.FRIEND_REPO_TOKEN1 }}
+          FRIEND_REPO_TOKEN: ${{ secrets.FRIEND_REPO_TOKEN1 }}
         run: |
           echo "Pushing branch: $GITHUB_REF_NAME"
-          git remote add friend "https://YashKhandelwal683:${FRIEND_REPO_TOKEN1}@github.com/Yashkhandelwal683/Frontend-Dev.git"
+
+          # Add your target repo as remote using the PAT
+          git remote add friend "https://YashKhandelwal683:${FRIEND_REPO_TOKEN}@github.com/Yashkhandelwal683/Frontend-Dev.git"
           git remote -v
 
-      - name: Push to friend repo (excluding workflows)
-        env:
-          FRIEND_REPO_TOKEN1: ${{ secrets.FRIEND_REPO_TOKEN1 }}
-        run: |
-          git fetch origin $GITHUB_REF_NAME
-          git checkout $GITHUB_REF_NAME
-
+          # Exclude workflow files if they exist
           if [ -d ".github/workflows" ]; then
-            echo "Removing workflow files before push..."
+            echo "Removing workflows before push..."
             git rm -r --cached .github/workflows || true
             rm -rf .github/workflows
-          else
-            echo "No workflows directory found — skipping removal."
+            git diff --cached --quiet || git commit -m "Exclude workflows from sync"
           fi
 
-          git diff --cached --quiet || git commit -m "Exclude workflows from sync"
-
-          echo "Pushing to friend's repo..."
-          git push "https://YashKhandelwal683:${FRIEND_REPO_TOKEN1}@github.com/Yashkhandelwal683/Frontend-Dev.git" HEAD:$GITHUB_REF_NAME --force
+          # Push to friend's repo (create branch if not exists)
+          git push friend HEAD:$GITHUB_REF_NAME --force

@@ -10,19 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source branch
+      - name: Checkout source branch (no credentials)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false  
 
       - name: Push to Yash Repo
+        env:
+          FRIEND_REPO_TOKEN: ${{ secrets.FRIEND_REPO_TOKEN1 }}
         run: |
           echo "Pushing branch: $GITHUB_REF_NAME"
+
           git config --global user.name "Yash Khandelwal"
           git config --global user.email "YashKhandelwal683@gmail.com"
 
-          # Add friend's repo as remote
-          git remote add friend https://x-access-token:${{ secrets.FRIEND_REPO_TOKEN1 }}@github.com/Yashkhandelwal683/Frontend-Dev.git
+          # Add your target repo as remote using the PAT
+          git remote add friend https://x-access-token:${FRIEND_REPO_TOKEN}@github.com/Yashkhandelwal683/Frontend-Dev.git
 
-          # Push the same branch, create it if missing
+          # Double-check which remotes exist
+          git remote -v
+
+          # Push the current branch
           git push friend HEAD:$GITHUB_REF_NAME --force

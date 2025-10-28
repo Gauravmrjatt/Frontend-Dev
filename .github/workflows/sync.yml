@@ -3,7 +3,7 @@ name: Mirror Repo to Friend
 on:
   push:
     branches:
-      - '**'   # Trigger on all branches
+      - '**'
 
 jobs:
   sync:
@@ -19,20 +19,19 @@ jobs:
         run: |
           git config --global user.name "Yash Khandelwal"
           git config --global user.email "YashKhandelwal683@gmail.com"
+          git config --unset credential.helper || true
 
       - name: Add friend remote
         run: |
           echo "Pushing branch: $GITHUB_REF_NAME"
-          git remote add friend https://x-access-token:${{ secrets.FRIEND_REPO_TOKEN1 }}@github.com/Yashkhandelwal683/Frontend-Dev.git
+          git remote add friend "https://${{ secrets.FRIEND_REPO_TOKEN1 }}@github.com/Yashkhandelwal683/Frontend-Dev.git"
           git remote -v
 
       - name: Push to friend repo (excluding workflows)
         run: |
-          # Ensure we’re on the correct branch
           git fetch origin $GITHUB_REF_NAME
           git checkout $GITHUB_REF_NAME
 
-          # Exclude .github/workflows if it exists
           if [ -d ".github/workflows" ]; then
             echo "Removing workflow files before push..."
             git rm -r --cached .github/workflows || true
@@ -41,8 +40,6 @@ jobs:
             echo "No workflows directory found — skipping removal."
           fi
 
-          # Commit removal if any change occurred
           git diff --cached --quiet || git commit -m "Exclude workflows from sync"
 
-          # Push to friend repo (create branch if missing)
           git push friend HEAD:$GITHUB_REF_NAME --force

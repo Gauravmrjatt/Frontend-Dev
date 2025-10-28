@@ -3,33 +3,39 @@ name: Mirror Repo to Friend
 on:
   push:
     branches:
-      - '**'   # Run for all branches
+      - '**'   # Trigger on all branches
 
 jobs:
   sync:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source branch (no credentials)
+      - name: Checkout source branch
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: false  
 
-      - name: Push to Yash Repo
-        env:
-          FRIEND_REPO_TOKEN: ${{ secrets.FRIEND_REPO_TOKEN1 }}
+      - name: Configure Git
         run: |
-          echo "Pushing branch: $GITHUB_REF_NAME"
-
           git config --global user.name "Yash Khandelwal"
           git config --global user.email "YashKhandelwal683@gmail.com"
 
-          # Add your target repo as remote using the PAT
-          git remote add friend https://x-access-token:${FRIEND_REPO_TOKEN}@github.com/Yashkhandelwal683/Frontend-Dev.git
-
-          # Double-check which remotes exist
+      - name: Add friend remote
+        run: |
+          echo "Pushing branch: $GITHUB_REF_NAME"
+          git remote add friend https://x-access-token:${{ secrets.FRIEND_REPO_TOKEN1 }}@github.com/Yashkhandelwal683/Frontend-Dev.git
           git remote -v
 
-          # Push the current branch
+      - name: Push to friend repo (excluding workflows)
+        run: |
+          # Make sure the branch exists locally
+          git fetch origin $GITHUB_REF_NAME
+          git checkout $GITHUB_REF_NAME
+
+          # Remove .github/workflows from staging so they aren’t pushed
+          rm -rf .github/workflows/
+          git add -A
+          git reset .github/workflows/
+
+          # Push to friend’s repo (create branch if not exists)
           git push friend HEAD:$GITHUB_REF_NAME --force

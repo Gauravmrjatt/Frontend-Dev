@@ -28,14 +28,21 @@ jobs:
 
       - name: Push to friend repo (excluding workflows)
         run: |
-          # Make sure the branch exists locally
+          # Ensure we’re on the correct branch
           git fetch origin $GITHUB_REF_NAME
           git checkout $GITHUB_REF_NAME
 
-          # Remove .github/workflows from staging so they aren’t pushed
-          rm -rf .github/workflows/
-          git add -A
-          git reset .github/workflows/
+          # Exclude .github/workflows if it exists
+          if [ -d ".github/workflows" ]; then
+            echo "Removing workflow files before push..."
+            git rm -r --cached .github/workflows || true
+            rm -rf .github/workflows
+          else
+            echo "No workflows directory found — skipping removal."
+          fi
 
-          # Push to friend’s repo (create branch if not exists)
+          # Commit removal if any change occurred
+          git diff --cached --quiet || git commit -m "Exclude workflows from sync"
+
+          # Push to friend repo (create branch if missing)
           git push friend HEAD:$GITHUB_REF_NAME --force

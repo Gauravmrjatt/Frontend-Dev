@@ -3,43 +3,33 @@ name: Mirror Repo to Friend
 on:
   push:
     branches:
-      - '**'   # Run for all branches
+      - '**'  # ✅ Trigger for all branches
 
 jobs:
   sync:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source branch (no credentials)
+      - name: Checkout current branch
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: false  # 🔴 Prevents GitHub bot token override
+          persist-credentials: false  # Important — prevents overwriting PAT
 
-      - name: Configure Git
-        run: |
-          git config --global user.name "Yash Khandelwal"
-          git config --global user.email "YashKhandelwal683@gmail.com"
-          git config --system --unset credential.helper || true
-          git config --global --unset credential.helper || true
-
-      - name: Push to Yash Repo (excluding workflows)
+      - name: Mirror push to Friend Repo
         env:
           FRIEND_REPO_TOKEN: ${{ secrets.FRIEND_REPO_TOKEN1 }}
         run: |
-          echo "Pushing branch: $GITHUB_REF_NAME"
+          echo "➡️ Pushing branch: $GITHUB_REF_NAME"
 
-          # Add your target repo as remote using the PAT
-          git remote add friend "https://YashKhandelwal683:${FRIEND_REPO_TOKEN}@github.com/Yashkhandelwal683/Frontend-Dev.git"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Add friend repo using PAT
+          git remote add friend https://x-access-token:${FRIEND_REPO_TOKEN}@github.com/Yashkhandelwal683/Frontend-Dev.git
+
+          # Show remotes (for debug)
           git remote -v
 
-          # Exclude workflow files if they exist
-          if [ -d ".github/workflows" ]; then
-            echo "Removing workflows before push..."
-            git rm -r --cached .github/workflows || true
-            rm -rf .github/workflows
-            git diff --cached --quiet || git commit -m "Exclude workflows from sync"
-          fi
-
-          # Push to friend's repo (create branch if not exists)
-          git push friend HEAD:$GITHUB_REF_NAME --force
+          # Push same branch to friend repo
+          git push friend $GITHUB_REF_NAME:$GITHUB_REF_NAME --force

@@ -1,0 +1,28 @@
+name: Mirror Repo to Friend
+
+on:
+  push:
+    branches:
+      - '**'   # Run for all branches
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to Yash Repo
+        run: |
+          echo "Pushing branch: $GITHUB_REF_NAME"
+          git config --global user.name "Yash Khandelwal"
+          git config --global user.email "YashKhandelwal683@gmail.com"
+
+          # Add friend's repo as remote
+          git remote add friend https://x-access-token:${{ secrets.FRIEND_REPO_TOKEN1 }}@github.com/Yashkhandelwal683/Frontend-Dev.git
+
+          # Push the same branch, create it if missing
+          git push friend HEAD:$GITHUB_REF_NAME --force

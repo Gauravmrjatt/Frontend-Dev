@@ -1,0 +1,10 @@
+/* 10. Navigation Bar with Transitions and Hover Effects */
+*{box-sizing:border-box}
+.nav{display:flex;gap:1rem;list-style:none;padding:0;margin:0;align-items:center}
+.nav a{display:block;padding:.6rem 1rem;border-radius:6px;border:1px solid transparent;transition:all .3s ease;text-decoration:none}
+.nav a:hover{transform:translateY(-3px);border-color:#ddd}
+.nav a.active{background:#222;color:#fff}
+/* Responsive: stack vertically below 700px */
+@media (max-width:700px){
+  .nav{flex-direction:column}
+}

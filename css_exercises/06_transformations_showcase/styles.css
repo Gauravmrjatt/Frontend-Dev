@@ -1,0 +1,8 @@
+/* 06. CSS Transformations Showcase */
+.container{display:flex;gap:1rem;align-items:center;justify-content:center;padding:2rem}
+.box{width:120px;height:120px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:all .4s ease}
+.box.rotate:hover{transform:rotate(15deg)}
+.box.scale:hover{transform:scale(1.1)}
+.box.translate:hover{transform:translateY(-12px)}
+.box.skew:hover{transform:skewX(12deg)}
+.label{display:block;text-align:center;margin-top:.5rem}

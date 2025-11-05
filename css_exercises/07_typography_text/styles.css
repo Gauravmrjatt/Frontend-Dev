@@ -1,0 +1,10 @@
+/* 07. Typography and Text Styling */
+body{font-family:Georgia, 'Times New Roman', serif;line-height:1.6;color:#222;padding:2rem}
+article{max-width:720px;margin:0 auto}
+h1{font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
+strong{color:#c0392b}
+em{color:#2980b9}
+mark{background:#fffb91;padding:0 .2em}
+p{letter-spacing:0.01em}
+article::first-line{font-weight:700}
+article::first-letter{font-size:2.2rem;float:left;margin-right:.15rem}

@@ -1,0 +1,9 @@
+/* 04. Shadows and Depth Effect Layout */
+body{margin:0;font-family:Arial, Helvetica, sans-serif;padding:2rem;background:#f0f3f4}
+.cards{display:flex;gap:1.5rem;justify-content:center}
+.card{width:260px;padding:1.25rem;border-radius:12px;background:#fff;transition:box-shadow .25s ease, transform .25s ease}
+.card.small-shadow{box-shadow:0 2px 6px rgba(0,0,0,0.08)}
+.card.medium-shadow{box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+.card.large-shadow{box-shadow:0 12px 28px rgba(0,0,0,0.18)}
+.card:hover{transform:translateY(-8px);box-shadow:0 24px 40px rgba(0,0,0,0.2)}
+h2{margin:0 0 0.5rem 0;text-shadow:1px 1px 0 rgba(0,0,0,0.05)}

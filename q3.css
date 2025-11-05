@@ -1,0 +1,40 @@
+*{box-sizing:border-box}
+body,html{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Arial}
+.page{min-height:100vh;display:flex;flex-direction:column}
+
+/* Header with space-around */
+.header{background:#0f172a;padding:1rem}
+.nav{display:flex;justify-content:space-around;gap:1rem}
+.nav a{color:white;text-decoration:none;padding:0.25rem 0.5rem}
+
+/* Main: three boxes horizontally aligned */
+.main{
+  display:flex;
+  gap:1rem;
+  padding:2rem;
+  align-items:center;
+  justify-content:center;
+  flex:1;
+  flex-wrap:wrap;
+}
+.box{
+  flex:1 1 220px;
+  min-width:180px;
+  height:200px;
+  background:white;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:600;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.25s;
+  backface-visibility:hidden;
+}
+/* hover rotate slightly */
+.box:hover{transform:rotate(2deg)}
+
+/* footer bottom full width */
+.footer{
+  background:#111827;color:white;text-align:center;padding:1rem;
+}

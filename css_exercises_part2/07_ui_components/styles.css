@@ -1,0 +1,7 @@
+/* 07. UI Components */
+.card{max-width:520px;margin:2rem auto;padding:1rem;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,0.08);background:linear-gradient(180deg,#ffffff,#f5f8ff)}
+.controls{display:flex;gap:1rem;align-items:center}
+.search{flex:1;padding:.6rem;border-radius:8px;border:1px solid #e0e6f0}
+.select{padding:.5rem;border-radius:8px;border:1px solid #e0e6f0}
+.btn{padding:.5rem 1rem;border-radius:8px;background:#0b76ef;color:#fff;border:none}
+.search:focus{outline:3px solid rgba(11,118,239,0.12);outline-offset:4px}

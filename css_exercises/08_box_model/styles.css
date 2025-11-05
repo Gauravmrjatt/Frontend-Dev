@@ -1,8 +1,0 @@
-/* 08. Box Model Exploration */
-.wrapper{display:flex;align-items:center;justify-content:center;height:80vh}
-.box-model{background:#fff;padding:1rem;border:2px solid #ddd}
-.box-visual{background:#ecf0f1;padding:16px;border:2px dashed #a0a0a0;margin:16px}
-/* default box-sizing */
-.demo-default{box-sizing:content-box}
-.demo-border-box{box-sizing:border-box}
-.legend{font-size:.9rem;margin-top:.5rem}

@@ -1,0 +1,19 @@
+/* 01. Pseudo-Classes */
+/* Demonstrate :hover, :focus, :active, :nth-child on links, buttons, list items. Use Flexbox to align in a row */
+.container{display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap}
+.example{background:#fff;border-radius:8px;padding:12px;min-width:200px;box-shadow:0 2px 6px rgba(0,0,0,0.06)}
+/* Links */
+.example a{color:#0b76ef;text-decoration:none;padding:.25rem .5rem;border-radius:4px}
+.example a:hover{background:#e8f1ff}
+.example a:active{transform:translateY(1px)}
+/* Buttons */
+.btn{display:inline-block;padding:.5rem 1rem;border-radius:6px;border:none;background:#16a085;color:#fff;cursor:pointer;transition:all .2s ease}
+.btn:hover{background:#139072}
+.btn:active{transform:scale(.98)}
+.btn:focus{outline:3px solid rgba(22,160,133,0.2);outline-offset:4px}
+/* List items using nth-child */
+.selector-list li{list-style:none;padding:.4rem}
+.selector-list li:nth-child(odd){background:#f7f9fb}
+.selector-list li:nth-child(even){background:#fff}
+/* Small explanatory text */
+.note{font-size:.9rem;color:#444;margin-top:.5rem}

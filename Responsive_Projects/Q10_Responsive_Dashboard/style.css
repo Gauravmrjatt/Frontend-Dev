@@ -1,0 +1,11 @@
+.dashboard{display:grid;grid-template-areas:
+'header header'
+'sidebar main';
+grid-template-columns:200px 1fr;animation:fadeIn 1s;}
+header{grid-area:header;background:#333;color:#fff;text-align:center;padding:10px;}
+aside{grid-area:sidebar;background:#f0f0f0;padding:10px;}
+main{grid-area:main;display:grid;gap:15px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));padding:10px;}
+.card{background:#fff;padding:20px;text-align:center;transition:transform 0.3s,box-shadow 0.3s;}
+.card:hover{transform:scale(1.05);box-shadow:0 4px 8px rgba(0,0,0,0.2);}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@media(max-width:750px){.dashboard{grid-template-areas:'header''sidebar''main';grid-template-columns:1fr;}}

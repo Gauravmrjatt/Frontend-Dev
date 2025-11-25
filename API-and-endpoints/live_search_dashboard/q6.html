@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Q6 — Registration (Axios)</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <h2>Register</h2>
+  <form id="form">
+    <input name="name" placeholder="Name" required><br>
+    <input name="email" placeholder="Email" type="email" required><br>
+    <button>Register</button>
+  </form>
+  <div id="msg"></div>
+
+  <script>
+    const form = document.getElementById('form');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const fd = new FormData(form);
+      const name = fd.get('name');
+      const email = fd.get('email');
+      document.getElementById('msg').textContent = 'Checking...';
+      axios.get('/users', { params: { email } })
+        .then(res => {
+          if(res.data && res.data.length){
+            document.getElementById('msg').textContent = 'Email already registered.';
+          } else {
+            // create
+            axios.post('/users', { name, email })
+              .then(()=> document.getElementById('msg').textContent = 'Registered!')
+              .catch(()=> document.getElementById('msg').textContent = 'Registration failed');
+          }
+        })
+        .catch(()=> document.getElementById('msg').textContent = 'Error checking email');
+    });
+  </script>
+</body>
+</html>

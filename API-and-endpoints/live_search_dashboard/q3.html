@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Q3 — Task Manager</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h2>Tasks</h2>
+  <label>Sort: <select id="sort"><option value="">--none--</option><option value="priority=Low">Low Priority</option><option value="priority=Medium">Medium Priority</option><option value="priority=High">High Priority</option><option value="completed=true">Completed</option></select></label>
+  <ul id="tasks"></ul>
+
+  <script>
+    function load(q=''){
+      $('#tasks').empty();
+      $.ajax({url:'/tasks?'+q, success:function(list){
+        list.forEach(t => {
+          const li = $(`<li>${t.title} [${t.priority}] <label><input type="checkbox"> Completed</label></li>`);
+          li.find('input').prop('checked', t.completed).on('change', function(){
+            const newVal = this.checked;
+            $.ajax({
+              url: '/tasks/'+t.id,
+              method: 'PATCH',
+              contentType: 'application/json',
+              data: JSON.stringify({ completed: newVal }),
+              success: function(){ /* ok */ },
+              error: function(){ alert('Failed to update task'); load(q); }
+            });
+          });
+          $('#tasks').append(li);
+        });
+      }});
+    }
+    $('#sort').on('change', function(){ load($(this).val()); });
+    load();
+  </script>
+</body>
+</html>

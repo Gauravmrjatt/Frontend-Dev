@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Q5 – Team Directory</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+.highlight { background: yellow; }
+</style>
+</head>
+
+<body>
+
+<div class="department">
+    <h3 class="manager">Manager A</h3>
+    <div class="employees">
+        <p class="emp">A1</p>
+        <p class="emp">A2</p>
+    </div>
+</div>
+
+<div class="department">
+    <h3 class="manager">Manager B</h3>
+    <div class="employees">
+        <p class="emp">B1</p>
+        <p class="emp">B2</p>
+    </div>
+</div>
+
+<button id="random">Highlight Siblings</button>
+
+<script>
+$(document).ready(function(){
+
+    $(".manager").click(function(){
+        $(this).next().find(".emp").addClass("highlight");
+    });
+
+    $(".emp").hover(
+        function(){ $(this).next().css("color", "blue"); },
+        function(){ $(this).next().css("color", "black"); }
+    );
+
+    $(".department").click(function(){
+        $(this).children().addClass("highlight");
+    });
+
+    $("#random").click(function(){
+        let list = $(".emp");
+        let rand = Math.floor(Math.random() * list.length);
+        list.eq(rand).siblings().addClass("highlight");
+    });
+
+});
+</script>
+
+</body>
+</html>

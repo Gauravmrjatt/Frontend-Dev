@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Q1 – Welcome Page Greeting</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+<h2 id="greet"></h2>
+<button id="change">Change Greeting</button>
+<button id="toggle">Toggle Welcome</button>
+
+<p id="welcomeMsg">Welcome to our website!</p>
+
+<script>
+$(document).ready(function(){
+
+    // 1. Personalized greeting
+    let hour = new Date().getHours();
+    let message = hour < 12 ? "Good Morning" :
+                  hour < 17 ? "Good Afternoon" : "Good Evening";
+    $("#greet").text(message);
+
+    // 2. Change greeting
+    $("#change").click(function(){
+        $("#greet").text("Stay positive, work hard, make it happen!");
+    });
+
+    // 3. Toggle message
+    $("#toggle").click(function(){
+        $("#welcomeMsg").toggle();
+    });
+
+    // 4. Alert on click
+    $("#greet").click(function(){
+        alert("Greeting clicked!");
+    });
+
+});
+</script>
+</body>
+</html>

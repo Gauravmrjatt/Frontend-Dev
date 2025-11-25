@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Q8 – Dynamic Blog Posts</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+<button id="add">Add Post</button>
+<button id="addTop">Add Featured Post</button>
+<button id="remove">Remove Last</button>
+
+<div id="posts">
+    <p class="post">First blog post</p>
+</div>
+
+<script>
+$(document).ready(function(){
+
+    $("#add").click(()=> $("#posts").append("<p class='post'>New Post</p>"));
+    $("#addTop").click(()=> $("#posts").prepend("<p class='post'>Featured Post</p>"));
+    $("#remove").click(()=> $("#posts .post").last().remove());
+
+    $(".post").each(function(){
+        if($(this).text().includes("blog")){
+            $(this).css("background","lightgreen");
+        }
+    });
+
+});
+</script>
+
+</body>
+</html>

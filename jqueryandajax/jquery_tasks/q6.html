@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Q6 – Subscription Panel</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+<button id="sub">Subscribe</button>
+<button id="unsub">Unsubscribe</button>
+
+<div id="topics">
+    <button class="topic">Sports</button>
+</div>
+
+<button id="addTopic">Add Topic</button>
+
+<p id="msg"></p>
+
+<script>
+$(document).ready(function(){
+
+    $("#sub").click(()=> $("#msg").text("Notifications Enabled!"));
+    $("#unsub").click(()=> $("#msg").text("Notifications Disabled!"));
+
+    // Add topic dynamically
+    $("#addTopic").click(function(){
+        $("#topics").append('<button class="topic">New Topic</button>');
+    });
+
+    // Attach handler
+    $(document).on("click", ".topic", function(){
+        $("#msg").text($(this).text() + " Subscribed!");
+    });
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Q9 – Multi jQuery Versions</title>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+var jq1 = jQuery.noConflict(true);
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+var jq2 = jQuery.noConflict(true);
+</script>
+
+</head>
+
+<body>
+
+<div id="carousel">Carousel Area</div>
+<div id="modal">Modal Area</div>
+
+<script>
+// Version 1 – Carousel
+jq1(function(){
+    jq1("#carousel").css("background","yellow");
+});
+
+// Version 2 – Modal
+jq2(function(){
+    jq2("#modal").css("background","lightblue");
+});
+</script>
+
+</body>
+</html>

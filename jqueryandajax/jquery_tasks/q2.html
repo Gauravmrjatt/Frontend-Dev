@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Q2 – Product Highlight</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+.selected { border: 2px solid red; }
+.highlight { background: yellow; }
+.discount { background: lightgreen; }
+</style>
+</head>
+
+<body>
+
+<div class="product" data-stock="yes" discount="true">
+    Product 1 <span class="fav">❤️</span>
+    <p class="details" style="display:none;">Extra details...</p>
+</div>
+
+<div class="product" data-stock="no">
+    Product 2 <span class="fav">❤️</span>
+    <p class="details" style="display:none;">Extra details...</p>
+</div>
+
+<script>
+$(document).ready(function(){
+
+    // Click highlight
+    $(".product").click(function(){
+        $(this).toggleClass("highlight");
+    });
+
+    // Hover show details
+    $(".product").hover(
+        function(){ $(this).find(".details").show(); },
+        function(){ $(this).find(".details").hide(); }
+    );
+
+    // Favorite toggle
+    $(".fav").click(function(e){
+        e.stopPropagation();
+        $(this).toggleClass("selected");
+    });
+
+    // Attribute selector for discount
+    $("[discount='true']").addClass("discount");
+
+    // Out of stock alert
+    $(".product").each(function(){
+        if($(this).data("stock") === "no"){
+            $(this).click(function(){
+                alert("This product is OUT OF STOCK!");
+            });
+        }
+    });
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Q4 – Special Offer Banner</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+.banner { padding: 10px; background: orange; margin: 10px; }
+</style>
+</head>
+
+<body>
+
+<div class="banner" id="banner1">Offer 1</div>
+<div class="banner" id="banner2">Offer 2</div>
+
+<button id="hide">Hide</button>
+<button id="show">Show</button>
+<button id="slide">Slide Toggle</button>
+<button id="fade">Fade Toggle</button>
+
+<script>
+$(document).ready(function(){
+
+    $("#hide").click(function(){ $(".banner").hide(); });
+    $("#show").click(function(){ $(".banner").show(); });
+    $("#slide").click(function(){ $(".banner").slideToggle(); });
+    $("#fade").click(function(){ $(".banner").fadeToggle(); });
+
+    // Auto rotate banners
+    let i = 0;
+    setInterval(function(){
+        $(".banner").fadeOut();
+        setTimeout(()=> $(".banner").eq(i++ % 2).fadeIn(), 500);
+    }, 5000);
+
+});
+</script>
+
+</body>
+</html>
